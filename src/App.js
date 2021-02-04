@@ -9,10 +9,15 @@ import { Checkbox } from "baseui/checkbox";
 import { Accordion, Panel } from "baseui/accordion";
 import { useStyletron } from "baseui";
 import { FormControl } from "baseui/form-control";
+import {AppNavBar, setItemActive} from 'baseui/app-nav-bar';
+import {ChevronDown, Delete, Overflow, Upload} from 'baseui/icon';
+import logo from "./img/logo.jpg"
+
 
 import zxcvbn from "zxcvbn";
 import { generate as generatePassword } from "generate-password";
 import copy from "copy-to-clipboard";
+import { autoComposeDeep } from "styletron-react";
 
 const getStrengthColor = strength => {
   switch (strength) {
@@ -41,6 +46,23 @@ const App = () => {
   const [strength, setStrength] = useState(null);
   const passwordRef = useRef(null);
 
+  // Navbar constants
+  const [mainItems, setMainItems] = React.useState([
+  
+    {
+      icon: ChevronDown,
+      label: 'Sign Out',
+      navExitIcon: Delete,
+      
+    },
+  ]);
+  const [userItems, setUserItems] = React.useState([
+    {icon: Overflow, label: 'Account item1'},
+    {icon: Overflow, label: 'Account item2'},
+    {icon: Overflow, label: 'Account item3'},
+    {icon: Overflow, label: 'Account item4'},
+  ]);
+
   const copyToClipboard = () => {
     copy(password);
     setCopied(true);
@@ -63,14 +85,43 @@ const App = () => {
   const [useCss, theme] = useStyletron();
 
   return (
+    <React.Fragment>
+    <AppNavBar
+      title={<img src={logo} style={{height:45}}></img>}
+      mainItems={mainItems}
+      onMainItemSelect={item => {
+        setMainItems(prev => setItemActive(prev, item));
+      }}
+      username="Jake Cui"
+      userImgUrl="https://scontent-sjc3-1.xx.fbcdn.net/v/t1.0-9/15698341_1547099641972103_6718830801661689385_n.jpg?_nc_cat=105&ccb=2&_nc_sid=cdbe9c&_nc_ohc=TOmokYALHRoAX9JU90S&_nc_ht=scontent-sjc3-1.xx&oh=0a58255b0aaaf970a724c49da944d304&oe=6041F349"
+      usernameSubtitle="5 Stars"
+      userItems={[
+        { icon: Overflow, label: "User A" },
+        { icon: Overflow, label: "User B" }
+      ]}
+      onUserItemSelect={item => console.log(item)}
+      overrides={{
+        Root: {
+          style: {
+            backgroundColor: "black"
+          }
+        },
+        MainMenuItem: {
+          style: {
+            color: "white"
+          }
+        }
+      }}
+    />
+
     <Card
       overrides={{
         Root: {
           style: {
             left: "50%",
             maxWidth: "420px",
-            position: "absolute",
             top: "20px",
+            margin: "auto",
             transform: "translate(-50%, 0)",
             width: "95vw"
           }
@@ -167,6 +218,7 @@ const App = () => {
         </Accordion>
       </StyledAction>
     </Card>
+    </React.Fragment>
   );
 };
 
