@@ -12,6 +12,10 @@ import { FormControl } from "baseui/form-control";
 import {AppNavBar, setItemActive} from 'baseui/app-nav-bar';
 import {ChevronDown, Delete, Overflow, Upload} from 'baseui/icon';
 import logo from "./img/logo.jpg"
+import { Navigation } from "baseui/side-navigation";
+import {Grid, Cell} from 'baseui/layout-grid';
+import './App.css'
+
 
 
 import zxcvbn from "zxcvbn";
@@ -68,6 +72,10 @@ const App = () => {
     setCopied(true);
   };
 
+  const [activeItemId, setActiveItemId] = React.useState(
+    "#primary"
+  );
+
   const setNewPassword = p => {
     const newPassword = p
       ? p
@@ -81,17 +89,20 @@ const App = () => {
   useEffect(() => {
     setNewPassword();
   }, [length, uppercase, symbols, numbers]);
+  
+
 
   const [useCss, theme] = useStyletron();
 
   return (
     <React.Fragment>
-    <AppNavBar
+       <AppNavBar 
       title={<img src={logo} style={{height:45}}></img>}
       mainItems={mainItems}
       onMainItemSelect={item => {
         setMainItems(prev => setItemActive(prev, item));
       }}
+      
       username="Jake Cui"
       userImgUrl="https://scontent-sjc3-1.xx.fbcdn.net/v/t1.0-9/15698341_1547099641972103_6718830801661689385_n.jpg?_nc_cat=105&ccb=2&_nc_sid=cdbe9c&_nc_ohc=TOmokYALHRoAX9JU90S&_nc_ht=scontent-sjc3-1.xx&oh=0a58255b0aaaf970a724c49da944d304&oe=6041F349"
       usernameSubtitle="5 Stars"
@@ -103,8 +114,11 @@ const App = () => {
       overrides={{
         Root: {
           style: {
-            backgroundColor: "black"
-          }
+            backgroundColor: "black",
+            position: "fixed",
+            marginBottom: "scale100",
+            zIndex: 100
+          },
         },
         MainMenuItem: {
           style: {
@@ -112,9 +126,48 @@ const App = () => {
           }
         }
       }}
+      
     />
-
-    <Card
+{/* second one */}
+    <div style={{height:100}}></div>
+   <div > 
+   <Grid >
+      <Cell span={2}><Navigation
+      items={[
+        {
+          title: "Colors",
+          itemId: "#colors",
+          subNav: [
+            { title: "Primary", itemId: "#primary" },
+            {
+              title: "Shades",
+              itemId: "#shades",
+              subNav: [
+                { title: "Dark", itemId: "#dark" },
+                {
+                  title: "Disabled",
+                  itemId: "#disabled",
+                  disabled: true
+                }
+              ]
+            }
+          ]
+        }
+      ]}
+      activeItemId={activeItemId}
+      onChange={({ item }) =>
+        setActiveItemId(item.itemId)
+      }
+      overrides={{
+        Root: {
+          style: {
+          position: 'fixed'
+        }
+      }
+      }}
+    /></Cell>
+      <Cell span={10}>
+      <Card
       overrides={{
         Root: {
           style: {
@@ -218,6 +271,57 @@ const App = () => {
         </Accordion>
       </StyledAction>
     </Card>
+   <Card></Card>   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+   <Card></Card>
+
+      </Cell>
+    </Grid>
+    </div>
+   
     </React.Fragment>
   );
 };
