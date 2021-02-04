@@ -104,6 +104,11 @@ const App = () => {
     display: "flex",
     alignItems: "center"});
 
+    const [isNavVisible, setIsNavVisible] = React.useState(false);
+  function handleMainItemSelect(item) {
+    setMainItems(prev => setItemActive(prev, item));
+  }
+
 
     
   const rightBorder = useCss({ position: "fixed",left:'30px'});
@@ -216,8 +221,11 @@ const App = () => {
 
       <HeadingLevel>
       <Heading styleLevel={1}>Create a marketing campaign</Heading>
-      <Heading styleLevel={4}>Join a pop-up campaign</Heading>
-
+     {isNavVisible && <Heading styleLevel={4}>Join a pop-up campaign</Heading> }
+     {!isNavVisible && <Heading styleLevel={4}>sah dude</Heading>}
+      <Button onClick={() => setIsNavVisible(prev => !prev)}>
+        {isNavVisible ? 'Hide' : 'Show'} navigation bar
+      </Button>
       <Heading styleLevel={6}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan augue at massa cursus, non tincidunt dolor sagittis. Nunc imperdiet placerat justo sed pharetra. Curabitur quis mi varius, auctor nulla placerat, venenatis augue. In hendrerit fermentum aliquam. Phasellus ultricies lacus non purus sollicitudin euismod. Curabitur aliquam mi et blandit volutpat. Mauris mattis cursus maximus. Aliquam ut cursus sem. Suspendisse lacinia viverra sagittis.
 
 Vivamus ac ultrices metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus pellentesque, ante ornare ultricies blandit, purus ligula varius lorem, sit amet egestas nulla odio quis neque. Aliquam vitae malesuada felis. Fusce quis nulla quis magna imperdiet commodo fermentum blandit dui. Ut purus erat, commodo quis sapien vitae, cursus mollis libero. Donec consequat eget purus eu lobortis.
