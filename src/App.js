@@ -15,6 +15,9 @@ import logo from "./img/logo.jpg"
 import { Navigation } from "baseui/side-navigation";
 import {Grid, Cell} from 'baseui/layout-grid';
 import './App.css'
+import {Heading, HeadingLevel} from 'baseui/heading';
+
+import {FaHome, FaStoreAlt, FaChartLine, FaStarHalfAlt, FaPaste, FaCreditCard,FaTag, FaUserFriends, FaFolder} from 'react-icons/fa';
 
 
 
@@ -93,11 +96,23 @@ const App = () => {
 
 
   const [useCss, theme] = useStyletron();
+  const leftItem = useCss({
+    fontSize: "16px", 
+    color: "gray",
+    marginTop: "30px",
+    marginBottom: "30px",
+    display: "flex",
+    alignItems: "center"});
+
+
+    
+  const rightBorder = useCss({ position: "fixed",left:'30px'});
+    const leftBorder = useCss({borderLeft: "1px solid lightgray", paddingLeft: '50px'})
 
   return (
     <React.Fragment>
        <AppNavBar 
-      title={<img src={logo} style={{height:45}}></img>}
+      title={<img src={logo} style={{height:35, position: 'relative', left:'-100px'}}></img>}
       mainItems={mainItems}
       onMainItemSelect={item => {
         setMainItems(prev => setItemActive(prev, item));
@@ -116,43 +131,49 @@ const App = () => {
           style: {
             backgroundColor: "black",
             position: "fixed",
-            marginBottom: "scale100",
-            zIndex: 100
+            marginBottom: "scale50",
+            zIndex: 100,
+            
           },
+        },
+        Spacing: {
+          style: {
+            position: 'relative',
+            left:'50px'
+          }
         },
         MainMenuItem: {
           style: {
-            color: "white"
+            color: "white",
+            position: 'relative',
+            left:'50px'
           }
         }
       }}
       
     />
 {/* second one */}
-    <div style={{height:100}}></div>
+    <div style={{height:70}}></div>
    <div > 
    <Grid >
-      <Cell span={2}><Navigation
+      <Cell span={1.5} >
+      <div className={rightBorder}>
+      <div style={{height:30}}></div>
+
+      {/* <Navigation 
+    className={rightBorder} 
       items={[
         {
           title: "Colors",
+          icon: ChevronDown,
           itemId: "#colors",
-          subNav: [
-            { title: "Primary", itemId: "#primary" },
-            {
-              title: "Shades",
-              itemId: "#shades",
-              subNav: [
-                { title: "Dark", itemId: "#dark" },
-                {
-                  title: "Disabled",
-                  itemId: "#disabled",
-                  disabled: true
-                }
-              ]
-            }
-          ]
-        }
+        },
+        {
+          title: "Analytics",
+          icon: ChevronDown,
+          itemId: "#colors",
+        },
+
       ]}
       activeItemId={activeItemId}
       onChange={({ item }) =>
@@ -165,8 +186,50 @@ const App = () => {
         }
       }
       }}
-    /></Cell>
-      <Cell span={10}>
+    /> */}
+    <div className={leftItem}><FaHome/> &emsp;Home </div>
+    <div className={leftItem}> <FaStoreAlt></FaStoreAlt> &emsp;Stores </div>
+    
+    <div className={leftItem}><FaChartLine/> &emsp;Analytics </div>
+    <div className={leftItem}><FaStarHalfAlt/> &emsp;Feedback </div>
+    <div className={leftItem}><FaPaste/> &emsp;Reports </div>
+    <div className={leftItem}><FaCreditCard/> &emsp;Payments </div>
+    <div className={useCss({
+    fontSize: "16px", 
+    color: "green",
+    marginTop: "30px",
+    marginBottom: "30px",
+    display: "flex",
+    alignItems: "center"})}><FaTag/> &emsp;Marketing </div>
+    <div className={leftItem}><FaUserFriends/> &emsp;Users </div>
+    <div className={leftItem}><FaFolder/> &emsp;Documents </div>
+
+    <div className={leftItem}><FaHome/> &emsp;Settings </div>
+
+
+    </div>
+    </Cell>
+      <Cell span={10}> 
+
+      <div className={leftBorder}>
+      <div style={{height:30}}></div>
+
+      <HeadingLevel>
+      <Heading styleLevel={1}>Create a marketing campaign</Heading>
+      <Heading styleLevel={4}>Join a pop-up campaign</Heading>
+
+      <Heading styleLevel={6}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan augue at massa cursus, non tincidunt dolor sagittis. Nunc imperdiet placerat justo sed pharetra. Curabitur quis mi varius, auctor nulla placerat, venenatis augue. In hendrerit fermentum aliquam. Phasellus ultricies lacus non purus sollicitudin euismod. Curabitur aliquam mi et blandit volutpat. Mauris mattis cursus maximus. Aliquam ut cursus sem. Suspendisse lacinia viverra sagittis.
+
+Vivamus ac ultrices metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus pellentesque, ante ornare ultricies blandit, purus ligula varius lorem, sit amet egestas nulla odio quis neque. Aliquam vitae malesuada felis. Fusce quis nulla quis magna imperdiet commodo fermentum blandit dui. Ut purus erat, commodo quis sapien vitae, cursus mollis libero. Donec consequat eget purus eu lobortis.
+
+Morbi in diam nunc. Curabitur sit amet tellus enim. Nullam eu maximus risus. Sed pharetra felis sed molestie fermentum. Proin dignissim enim id blandit iaculis. Integer dolor lacus, tincidunt ut accumsan semper, sodales sed sem. Suspendisse hendrerit libero enim. Sed vulputate vehicula vulputate. Nullam mattis sapien eu diam lacinia, placerat consectetur arcu vestibulum. Integer interdum bibendum laoreet. Proin lacinia ex eget purus dignissim laoreet. Sed tincidunt mi arcu, vestibulum suscipit mi molestie ut. Cras mattis consectetur viverra. Curabitur tellus turpis, vulputate eu hendrerit quis, venenatis eget odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In quis sapien viverra, ultrices tellus posuere, aliquet tellus.
+
+Vivamus in quam sit amet massa convallis varius. Nunc pretium vitae nunc in rutrum. Maecenas ut dignissim lectus. Curabitur vulputate, justo quis malesuada euismod, turpis sapien vehicula ante, ac pellentesque nunc ligula et arcu. Quisque nulla urna, faucibus eu venenatis eu, placerat vitae enim. Mauris sed urna laoreet, euismod risus nec, sagittis ante. Vivamus vehicula non sem vitae posuere. Nulla finibus est eget tincidunt porta. Sed ultrices, mauris eget ultrices placerat, enim nisi molestie odio, quis aliquam enim odio eu nisl. Maecenas rutrum rutrum fringilla. Duis semper vitae lorem ut commodo. Pellentesque porttitor, libero at rhoncus bibendum, est ex egestas eros, laoreet feugiat ligula leo id diam. Ut ullamcorper euismod mauris, eget fringilla diam volutpat et.
+
+Integer facilisis pharetra massa vel commodo. Nullam tempus ac arcu eget venenatis. Vestibulum massa ante, sagittis vitae euismod sit amet, elementum ac ante. Aliquam erat volutpat. Duis venenatis blandit porta. In cursus nulla sed turpis fermentum, vel feugiat lacus semper. Duis non augue ut ipsum dictum finibus eu eu tellus. Quisque ultricies, nunc eget viverra vestibulum, eros ex laoreet erat, sed posuere purus felis nec tortor. Aenean consequat pulvinar consectetur. Suspendisse potenti. Donec dignissim ex turpis, ut sagittis turpis dictum eu. Vestibulum eu elit id mi iaculis imperdiet a vitae erat.</Heading>
+
+
+      </HeadingLevel>
       <Card
       overrides={{
         Root: {
@@ -180,97 +243,8 @@ const App = () => {
           }
         }
       }}
-    >
-      <StyledBody>
-        <Input
-          ref={passwordRef}
-          value={password}
-          onChange={event => setNewPassword(event.target.value)}
-          overrides={{
-            InputContainer: {
-              style: ({ $theme }) => ({
-                borderColor: $theme.colors[getStrengthColor(strength)],
-                borderWidth: $theme.sizing.scale100
-              })
-            },
-            After: () => (
-              <Button
-                kind={KIND.minimal}
-                shape={SHAPE.square}
-                onClick={() => setNewPassword()}
-              >
-                <svg
-                  className={useCss({
-                    height: theme.sizing.scale800,
-                    width: theme.sizing.scale800
-                  })}
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#aaaaaa"
-                    d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
-                  />
-                </svg>
-              </Button>
-            )
-          }}
-        />
-      </StyledBody>
-      <StyledAction>
-        <div className={useCss({ marginBottom: theme.sizing.scale800 })}>
-          <Button
-            onClick={copyToClipboard}
-            overrides={{
-              BaseButton: {
-                style: () => ({
-                  width: "100%"
-                })
-              }
-            }}
-          >
-            {copied ? "Copied" : "Copy"}
-          </Button>
-        </div>
-        <Accordion>
-          <Panel title="Options">
-            <Block marginBottom="scale800">
-              <FormControl label="Length">
-                <Slider
-                  min={4}
-                  max={64}
-                  value={[length]}
-                  onChange={({ value }) => setLength(value[0])}
-                />
-              </FormControl>
-            </Block>
-            <Block>
-              <FormControl label="Characters">
-                <div>
-                  <Checkbox
-                    checked={uppercase}
-                    onChange={() => setUppercase(!uppercase)}
-                  >
-                    A-Z
-                  </Checkbox>
-                  <Checkbox
-                    checked={numbers}
-                    onChange={() => setNumbers(!numbers)}
-                  >
-                    0-9
-                  </Checkbox>
-                  <Checkbox
-                    checked={symbols}
-                    onChange={() => setSymbols(!symbols)}
-                  >
-                    %@#
-                  </Checkbox>
-                </div>
-              </FormControl>
-            </Block>
-          </Panel>
-        </Accordion>
-      </StyledAction>
-    </Card>
+    ></Card>
+    
    <Card></Card>   <Card></Card>
    <Card></Card>
    <Card></Card>
@@ -317,7 +291,7 @@ const App = () => {
    <Card></Card>
    <Card></Card>
    <Card></Card>
-
+   </div>
       </Cell>
     </Grid>
     </div>
