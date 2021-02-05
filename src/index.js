@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {Provider as StyletronProvider} from 'styletron-react';
 import {Client as Styletron} from 'styletron-engine-atomic';
 import {LightTheme, BaseProvider} from 'baseui';
+
 const engine = new Styletron();
 
 ReactDOM.render(

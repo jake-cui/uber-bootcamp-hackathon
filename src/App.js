@@ -16,6 +16,9 @@ import { Navigation } from "baseui/side-navigation";
 import {Grid, Cell} from 'baseui/layout-grid';
 import './App.css'
 import {Heading, HeadingLevel} from 'baseui/heading';
+import MyLineGraph from './components/OfferHomeLineGraph'
+import {Line} from 'react-chartjs-2';
+
 
 import {FaHome, FaStoreAlt, FaChartLine, FaStarHalfAlt, FaPaste, FaCreditCard,FaTag, FaUserFriends, FaFolder} from 'react-icons/fa';
 
@@ -44,6 +47,7 @@ const getStrengthColor = strength => {
 };
 
 const App = () => {
+
   const [length, setLength] = useState(32);
   const [uppercase, setUppercase] = useState(true);
   const [copied, setCopied] = useState(false);
@@ -51,7 +55,34 @@ const App = () => {
   const [symbols, setSymbols] = useState(true);
   const [password, setPassword] = useState("");
   const [strength, setStrength] = useState(null);
+  const [screenToDisplay, setScreen] = useState("");
   const passwordRef = useRef(null);
+  const data = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+      {
+        label: 'My First dataset',
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: [65, 59, 80, 81, 56, 55, 40]
+      }
+    ]
+  };
 
   // Navbar constants
   const [mainItems, setMainItems] = React.useState([
@@ -115,7 +146,12 @@ const App = () => {
     const leftBorder = useCss({borderLeft: "1px solid lightgray", paddingLeft: '50px'})
 
   return (
+    
     <React.Fragment>
+      <div className="graph"> 
+      </div>
+       
+
        <AppNavBar 
       title={<img src={logo} style={{height:35, position: 'relative', left:'-100px'}}></img>}
       mainItems={mainItems}
@@ -165,33 +201,6 @@ const App = () => {
       <div className={rightBorder}>
       <div style={{height:30}}></div>
 
-      {/* <Navigation 
-    className={rightBorder} 
-      items={[
-        {
-          title: "Colors",
-          icon: ChevronDown,
-          itemId: "#colors",
-        },
-        {
-          title: "Analytics",
-          icon: ChevronDown,
-          itemId: "#colors",
-        },
-
-      ]}
-      activeItemId={activeItemId}
-      onChange={({ item }) =>
-        setActiveItemId(item.itemId)
-      }
-      overrides={{
-        Root: {
-          style: {
-          position: 'fixed'
-        }
-      }
-      }}
-    /> */}
     <div className={leftItem}><FaHome/> &emsp;Home </div>
     <div className={leftItem}> <FaStoreAlt></FaStoreAlt> &emsp;Stores </div>
     
@@ -221,11 +230,18 @@ const App = () => {
 
       <HeadingLevel>
       <Heading styleLevel={1}>Create a marketing campaign</Heading>
-     {isNavVisible && <Heading styleLevel={4}>Join a pop-up campaign</Heading> }
-     {!isNavVisible && <Heading styleLevel={4}>sah dude</Heading>}
-      <Button onClick={() => setIsNavVisible(prev => !prev)}>
+     {/* {isNavVisible && <Heading styleLevel={4}>Join a pop-up campaign</Heading> } */}
+     {/* {!isNavVisible && <Heading styleLevel={4}>sah dude</Heading>} */}
+     {/* {screenToDisplay} */}
+      {/* <Button onClick={() => setIsNavVisible(prev => !prev)}>
         {isNavVisible ? 'Hide' : 'Show'} navigation bar
-      </Button>
+      </Button> */}
+
+    
+      <div>
+      <MyLineGraph />
+
+      </div>
       <Heading styleLevel={6}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan augue at massa cursus, non tincidunt dolor sagittis. Nunc imperdiet placerat justo sed pharetra. Curabitur quis mi varius, auctor nulla placerat, venenatis augue. In hendrerit fermentum aliquam. Phasellus ultricies lacus non purus sollicitudin euismod. Curabitur aliquam mi et blandit volutpat. Mauris mattis cursus maximus. Aliquam ut cursus sem. Suspendisse lacinia viverra sagittis.
 
 Vivamus ac ultrices metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus pellentesque, ante ornare ultricies blandit, purus ligula varius lorem, sit amet egestas nulla odio quis neque. Aliquam vitae malesuada felis. Fusce quis nulla quis magna imperdiet commodo fermentum blandit dui. Ut purus erat, commodo quis sapien vitae, cursus mollis libero. Donec consequat eget purus eu lobortis.
